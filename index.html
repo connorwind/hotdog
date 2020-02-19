@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>{box-sizing: border-box;}
+
+        /* Button used to open the contact form - fixed at the bottom of the page */
+        .button {
+          background-color: rgb(32, 32, 32);
+          color: white;
+          padding: 16px 20px;
+          border: none;
+          cursor: pointer;
+          opacity: 0.8;
+          position: fixed;
+          bottom: 60%;
+          right: 40%;
+          width: 280px;
+        }
+        
+        /* The popup form - hidden by default */
+        .form-popup {
+          display: none;
+          position: fixed;
+          bottom: 30%;
+          right: 43%;
+          border: none;
+          z-index: 9;
+          background-color: rgb(26, 32, 31);
+        }
+        
+        /* Add styles to the form container */
+        .form-container {
+          max-width: 300px;
+          padding: 10px;
+          background-color:  rgb(246, 247, 196);
+        }
+        
+        /* Full-width input fields */
+        .form-container input[type=text] {
+          width: 80%;
+          padding: 15px;
+          margin: 5px 0 22px 0;
+          border: none;
+          background:  rgb(246, 247, 196);
+        }
+        
+        /* When the inputs get focus, do something */
+        .form-container input[type=text]:focus, :focus {
+          background-color: # rgb(246, 247, 196);
+          outline: none;
+          
+        }
+        
+        /* Set a style for the submit/login button */
+        .form-container .btn {
+          background-color: #4CAF50;
+          color: white;
+          padding: 16px 20px;
+          border: none;
+          cursor: pointer;
+          width: 100%;
+          margin-bottom:10px;
+          opacity: 0.8;
+        }
+        
+        /* Add a red background color to the cancel button */
+        .form-container .cancel {
+          background-color: red;
+        }
+        
+        /* Add some hover effects to buttons */
+        .form-container .btn:hover, .open-button:hover {
+          opacity: 1;
+        }
+       body{
+        background-color:  rgb(58, 63, 68);
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        
+       } 
+       h1, p{
+        color: wheat;
+       }
+        </style>
+</head>
+<body>
+<h1>
+    Joes's Hot Dogs!
+</h1>
+<p id="dog"></p>
+<p id="fry"></p>
+<p id="soda"></p>
+<p id="subtotal"></p>
+<p id="discount"></p>
+<p id="cost"></p>
+
+<button id="button" class="button" onclick="clickOrder()">Order Hot Dogs!</button>
+
+<!-- form definition-->
+<div class="form-popup" id="orderForm">
+    <form class="form-container" action="" onsubmit="return false">
+      <h2>Order</h1>
+  
+      <label for="numHotDogs" ><b>Number of Hot Dogs</b></label>
+      <input type="text" placeholder="Enter Number of Hot Dogs" id="d" name ="d" required>
+
+      <label for="numFries"><b>Number of Fries</b></label>
+      <input type="text" placeholder="Enter Number of Fries" id="f" name ="f" required>
+  
+      <label for="numSodas"><b>Number of Sodas</b></label>
+      <input type="text" placeholder="Enter Number of Sodas" id="s" name ="s" required>
+  
+      <button type="submit" class="btn"  onclick=submitOrder()>Submit Order</button>
+      <button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+  </div>
+
+
+<script>
+
+function openForm() {
+  document.getElementById("orderForm").style.display = "block";
+  document.getElementById("button").style.display = "none";
+}
+
+function clickOrder() {
+    openForm();
+    
+}
+
+function submitOrder(){
+var x = document.getElementById("d").value;
+document.getElementById("dog").innerHTML = "Hot Dog(s): "+x ;
+var y = document.getElementById("f").value;
+document.getElementById("fry").innerHTML = "Fries: "+y ;
+var z = document.getElementById("s").value;
+document.getElementById("soda").innerHTML = "Soda(s): "+z ;
+
+var total = x*3.25 + y*2 + z*1.5;
+document.getElementById("subtotal").innerHTML = "Subtotal: $"+total ;
+
+if(total >=20){
+  document.getElementById("discount").innerHTML = "You qualify for our discount!"; 
+    total = total*.9;
+}
+
+total = total*1.0625;
+
+
+document.getElementById("cost").innerHTML = "Total: $"+total.toFixed(2) ;
+
+
+document.getElementById("orderForm").style.display = "none";
+document.getElementById("button").style.display = "none";
+}
+
+
+
+
+function closeForm() {
+  document.getElementById("orderForm").style.display = "none";
+  document.getElementById("button").style.display = "block";
+
+
+}
+</script>
+
+</body>
+</html>
